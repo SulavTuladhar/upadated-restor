@@ -1,0 +1,18 @@
+.position-here{
+    position: fixed;
+    top: 91vh;
+}
+.docker{
+    border: 2px solid #cdb4db;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.docker span{
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+.docker span:hover{
+    transform: scale(1.2);
+}

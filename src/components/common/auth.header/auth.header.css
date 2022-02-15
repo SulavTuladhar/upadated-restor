@@ -1,0 +1,22 @@
+.header{
+    padding: 0 8vw;
+    height: 8vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+}
+
+.logo{
+    font-weight: normal;
+}
+.space-between{
+    flex: 10;
+}
+.header-side-text{
+    font-weight: normal;
+    color: rgb(167, 167, 167);
+}
+.header-side-text a{
+    text-decoration: none;
+    color: rgb(85, 85, 228)
+}
