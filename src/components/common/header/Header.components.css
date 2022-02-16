@@ -14,9 +14,19 @@
     width: 90vw;
     justify-content: space-between;
 }
+@media screen and (max-width: 575px) {
+    .nav-list{
+        align-items: center;
+        width: 90vw;
+        justify-content: center;
+    }
+}
 .nav-item{
     padding: 10px;
+}
+.nav-item a{
     color: #000;
+    text-decoration: none;
 }
 .nav-item:hover{
     color: blue;

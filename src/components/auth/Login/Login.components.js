@@ -32,7 +32,7 @@ export class Login extends Component {
     componentDidMount(){
         var rememberMe = JSON.parse(localStorage.getItem('remember_me'))
         if(rememberMe){
-            this.props.history.push('/view-products');
+            this.props.history.push('/dashboard');
         }
     }
 
@@ -41,7 +41,7 @@ export class Login extends Component {
         let isValidForm = this.validateForm()
         if (!isValidForm) return;
         // API CALL
-        httpClient.POST(`/auth/login`, this.state.data)
+        httpClient.POST(`/auth/login`, this.state.data, true)
             .then((response)=>{
                 notify.showSucess(`Welcome ${response.data.user.username}`);
                 // Local storage setup
@@ -49,7 +49,7 @@ export class Login extends Component {
                 localStorage.setItem('user', JSON.stringify(response.data.user));
                 localStorage.setItem('remember_me', this.state.remember_me);
                 // Navigating to dashboard
-                this.props.history.push('/view-products');
+                this.props.history.push('/dashboard');
             })
             .catch(err=>{
                 handleError(err); 

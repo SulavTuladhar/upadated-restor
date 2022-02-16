@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { handleError } from '../../../utils/errorHandler';
 import { httpClient } from '../../../utils/httpClient';
 import { notify } from '../../../utils/toaster';
@@ -8,6 +9,11 @@ const defaultForm = {
     category: '',
     price: ''
 }
+
+const logout = () => {
+    localStorage.clear(); // Clearing local storage
+    this.props.history.push('/login'); // Navigation to Login Page
+  }
 
 export class EditProduct extends Component {
     constructor(props){
@@ -62,7 +68,7 @@ export class EditProduct extends Component {
         httpClient.PUT(`/product/${this.productId}`, this.state.data, true)
             .then(res=>{
                 notify.showInfo('Product edited sucessfully');
-                this.props.history.push('/view-products');
+                this.props.history.push('/dashboard');
             })
             .catch(err=>{
                 notify.showError(err)
@@ -78,7 +84,10 @@ export class EditProduct extends Component {
     }
   render() {
       let content = this.state.isLoading 
-        ? <p> Showing loader </p> 
+        ?   <div className="lds-ring d-flex align-items-center justify-content-center"
+                style={{height: '80vh', width: '100vw'}}
+            >
+                <div></div><div></div><div></div><div></div></div>
         : <>
             <div className='d-flex align-items-center justify-content-center' style={{height: '80vh'}}>
                 <form className='form container' onSubmit={this.onSubmit}> 
@@ -96,6 +105,18 @@ export class EditProduct extends Component {
     return(
         <>
             {content}
+            {/* Docker */}
+            <div className="container-fluid position-here">
+            <div className="container d-flex justify-content-center">
+              <div className="row docker pt-1 pb-1 col-12 col-lg-8"  style={{backgroundColor: "#cdb4db"}}>
+                <span> <img src="../images/home-icon.svg" alt="home-icon"/> </span>
+                <span> <img src="../images/search-icon.svg" alt="search-icon"/> </span>
+                <span> <Link to="/dashboard"> <img src="../images/back-icon.svg" alt="add-icon"/> </Link> </span>
+                <span> <img src="../images/setting-icon.svg" alt="settings-icon"/> </span>
+                <span onClick={()=>logout()}> <img src="../images/logout-icon.svg" alt="logout-icon"/> </span>
+              </div>
+            </div>
+        </div>
         </>
     )
   }

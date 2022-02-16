@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { handleError } from '../../../utils/errorHandler';
 import { httpClient } from '../../../utils/httpClient';
 import { notify } from '../../../utils/toaster';
-import Docker from '../../common/Docker/Docker.components';
+import { Header } from '../../common/header/Header.components';
 
 import './ViewProducts.componrnts.css'; // Loading CSS
 
@@ -37,7 +37,6 @@ export class ViewProducts extends Component {
             })
     }
     removeItem = (id, index) => {
-        console.log('clicked')
         //ask for confirmation
         const confirmation = window.confirm('Are you sure to remove?');
         if(confirmation){
@@ -60,39 +59,43 @@ export class ViewProducts extends Component {
 
 
     render() { 
-        const logout = () => {
-            localStorage.clear(); // Clearing local storage
-            this.props.history.push('/login'); // Navigation to Login Page
-          };
-
+      
           let content = this.state.isLoading
-            ? <p> Show Loader </p>
+            ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
             : <>
-
                 <table className="table">
                     <thead>
                         <tr> 
-                            <th> S.N </th>
+                            <th> S.N </th> 
                             <th> Name </th>
                             <th> Category </th>
                             <th> Price </th>
-                            <th> Options </th>
+                            {this.props.seenByAdmin
+                                ? <th> Options </th>
+                                : <></>
+                            }
                         </tr>
                     </thead> 
                     <tbody>
 
                         {
                             (this.state.products || []).map((product,index) => (
-                                <tr> 
-                                    <td> { index + 1 } </td>
-                                    <td> {product.name} </td>
-                                    <td> {product.category} </td>
-                                    <td> {product.price} </td>
+                                <tr key={index}> 
+                                    <td>{ index + 1 }</td>
+                                    <td>{product.name}</td>
+                                    <td>{product.category}</td>
+                                    <td>{product.price}</td>
                                     <td> 
-                                        <Link to={`/edit-product/${product._id}`}>
-                                            <button className='btn '> edit </button> 
-                                        </Link>
-                                        <button className='btn ml-2' style={{background:"#dc3545"}} onClick={() => this.removeItem(product._id,index)}> delete </button> 
+                                        {this.props.seenByAdmin
+                                            ? <> 
+                                                <Link to={`/edit-product/${product._id}`}>
+                                                    <button className='btn '> edit </button> 
+                                                </Link>
+                                                <button className='btn ml-2' style={{background:"#dc3545"}} onClick={() => this.removeItem(product._id,index)}> delete </button> 
+                                              </>
+                                            : <></>
+                                        }
+                                        
                                     </td>
                                 </tr>
                             ))
@@ -105,15 +108,18 @@ export class ViewProducts extends Component {
 
         return (
             <>
-      
+            {
+                this.props.seenByAdmin
+                    ? ''
+                    : <Header viewProducts />
+            }
             {/* View Product Page */}
             <section>
-                <h1 className='text-center'> Products </h1>
+                <h1 className='text-center'> Menu </h1>
             <div className='container mt-5 mb-5 pb-2 text-center'>
                 {content}
             </div>
 
-            <Docker />
             </section>
           </>
             

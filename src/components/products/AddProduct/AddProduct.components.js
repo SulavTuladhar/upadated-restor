@@ -23,7 +23,7 @@ export class AddProduct extends Component {
         httpClient.POST('/product', data, true)
             .then(res=>{
                 notify.showSucess('Product added sucessfully');
-                this.props.history.push('/view-products');
+                this.props.history.push('/dashboard');
             })
             .catch(err =>{
                 handleError(err)

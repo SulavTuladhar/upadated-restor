@@ -19,7 +19,7 @@ class DockerHere extends Component {
                 <span> <img src="./images/search-icon.svg" alt="search-icon"/> </span>
                 {
                     this.props.ProductForm 
-                        ? <span> <Link to="/view-products"> <img src="./images/back-icon.svg" alt="add-icon"/> </Link> </span>
+                        ? <span> <Link to="/dashboard"> <img src="./images/back-icon.svg" alt="add-icon"/> </Link> </span>
                         : <span> <Link to="/add-product"> <img src="./images/add-icon.svg" alt="add-icon"/> </Link> </span>
                 }
                 <span> <img src="./images/setting-icon.svg" alt="settings-icon"/> </span>

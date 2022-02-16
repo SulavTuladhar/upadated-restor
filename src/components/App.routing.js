@@ -6,6 +6,7 @@ import { Login } from "./auth/Login/Login.components";
 import { Register } from "./auth/Register/Register.components";
 import { Header } from "./common/header/Header.components";
 import {PageNotFound } from "./common/PageNotFound/PageNotFound.components";
+import { Dashboard } from "./Dashboard/Dashboard.components";
 import { Home } from "./home/Home.components";
 import { AddProduct } from "./products/AddProduct/AddProduct.components";
 import { EditProduct } from "./products/EditProduct/Editproducts.components";
@@ -26,7 +27,9 @@ const ProtectedRoute = ({component: Component, ...rest}) =>{
 
 const PublicRoute = ({component: Component, ...rest}) =>{
     return <Route {...rest} render={(routerProps) => (
+                  <>  
                     <Component {...routerProps} />
+                    </>
     )} /> 
 }
 
@@ -37,9 +40,10 @@ export const AppRouting = (props) =>{
                 <PublicRoute path="/" component={ Home } exact />
                 <PublicRoute path="/login" component={ Login } />
                 <PublicRoute path="/register" component={ Register } />
+                <PublicRoute path="/view-products" component={  ViewProducts } />
                 <ProtectedRoute path="/edit-product/:id" component={ EditProduct } />
                 <ProtectedRoute path="/add-product" component={  AddProduct } />
-                <ProtectedRoute path="/view-products" component={  ViewProducts } />
+                <ProtectedRoute path="/dashboard" component={  Dashboard } />
                 <PublicRoute path="*" component={  PageNotFound } exact />
             </Switch>
         </BrowserRouter>

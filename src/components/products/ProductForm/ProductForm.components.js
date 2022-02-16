@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { SubmitBtn } from '../../common/submitBtn/SubmitBtn.components';
-import { Link } from 'react-router-dom';
 
 
 import './ProductForm.components.css'
@@ -56,16 +55,16 @@ export default class ProductForm extends Component {
                 
                 
                 <form className="add-form" onSubmit={this.onSubmit} noValidate>
-                  <label htmlfor="name"> Name  </label>
+                  <label htmlFor="name"> Name  </label>
                   <input type="text" name="name" id="name" onChange={this.handleChange} />
 
-                  <label htmlfor="description"> Description  </label>
+                  <label htmlFor="description"> Description  </label>
                   <input type="text" name="description" id="description" onChange={this.handleChange} />
 
-                  <label htmlfor="price"> Price  </label>
+                  <label htmlFor="price"> Price  </label>
                   <input type="number" name="price" id="price" onChange={this.handleChange}/>
 
-                  <label htmlfor="category"> Category  </label>
+                  <label htmlFor="category"> Category  </label>
                   <input type="text" name="category" id="category" onChange={this.handleChange}/>   
                   <SubmitBtn
                   isSubmitting = {this.props.isSubmitting}
